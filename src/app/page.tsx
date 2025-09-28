@@ -108,11 +108,11 @@ export default function Home() {
           <p className="text-lg sm:text-2xl mb-6">
             Millions of movies, TV shows and people to discover. Explore now.
           </p>
-          <div className="flex w-full gap-2 border border-gray-600 rounded-full overflow-hidden">
+          <div className="flex w-full gap-2 border-2 border-gray-500  rounded-full overflow-hidden">
             <input
               type="text"
               placeholder="Search for a movie, tv show, person..."
-              className="flex-1 py-3 px-6 text-black focus:outline-none rounded-l-full"
+              className="flex-1 py-3 px-6 text-slate-600 focus:outline-none rounded-l-full"
             />
             <button className="bg-gradient-to-r from-[#01b4e4] to-[#90cea1] px-6 py-3 font-semibold hover:opacity-90 rounded-r-full transition">
               Search
