@@ -1,14 +1,11 @@
-import axios from 'axios'
+export async function fetchFromTMDB(endpoint: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3${endpoint}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+  );
 
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_TMDB_BASE_URL,
-  params: {
-    api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
-    language: 'en-US',
-  },
-})
+  if (!res.ok) {
+    throw new Error(`TMDB API error: ${res.status}`);
+  }
 
-export async function getNowPlaying() {
-  const res = await api.get('/movie/now_playing')
-  return res.data.results
+  return res.json();
 }

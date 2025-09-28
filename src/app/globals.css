@@ -3,19 +3,10 @@
 
 /* Color variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f111a;
+  --foreground: #ededed;
   --primary: #1d4ed8; /* Tailwind blue-700 */
   --secondary: #f97316; /* Tailwind orange-500 */
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 /* Dark mode overrides */
@@ -26,13 +17,14 @@
   }
 }
 
-/* Smart animated gradient background */
+/* Smart animated cinematic gradient background */
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--foreground);
-  background: linear-gradient(270deg, #1e1e2f, #3a3a5c, #1e1e2f);
-  background-size: 600% 600%;
-  animation: gradientBG 20s ease infinite;
+  background: linear-gradient(120deg, #1e1e2f, #2b2b4a, #1e1e2f, #3a3a5c, #1e1e2f);
+  background-size: 800% 800%;
+  animation: gradientBG 25s ease infinite;
+  overflow-x: hidden;
 }
 
 /* Gradient animation */
@@ -40,8 +32,14 @@ body {
   0% {
     background-position: 0% 50%;
   }
+  25% {
+    background-position: 50% 50%;
+  }
   50% {
     background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
   }
   100% {
     background-position: 0% 50%;
@@ -51,4 +49,9 @@ body {
 /* Optional: smooth transitions for theme changes */
 * {
   transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Optional: scrollbar hide for better cinematic feel */
+::-webkit-scrollbar {
+  display: none;
 }
