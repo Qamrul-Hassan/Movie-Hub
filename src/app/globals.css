@@ -64,7 +64,7 @@ body {
   }
 }
 
-.motion-safe\\:animate-fade-in {
+.motion-safe\:animate-fade-in {
   animation: fadeIn 0.45s ease both;
 }
 
