@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { FaFilm, FaSearch } from 'react-icons/fa'
+import Image from 'next/image'
+import { FaSearch } from 'react-icons/fa'
 import { useEffect, useRef, useState } from 'react'
 
 type MenuKey = 'movies' | 'tvshows' | 'people' | 'kids' | 'more'
@@ -116,8 +117,15 @@ export default function Navbar() {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 pr-2 sm:pr-0">
               <Link href="/" className="inline-flex items-center gap-2 pr-1">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-300 text-[#032541]">
-                  <FaFilm aria-hidden="true" />
+                <span className="inline-flex h-16 w-16 items-center justify-center overflow-hidden">
+                  <Image
+                    src="/logo movie-hub.png"
+                    alt="Movie Hub logo"
+                    width={64}
+                    height={64}
+                    className="h-full w-full scale-110 object-contain brightness-125 contrast-125 saturate-150 drop-shadow-[0_0_16px_rgba(34,211,238,0.75)]"
+                    priority
+                  />
                 </span>
                 <span className="text-xl font-black tracking-tight text-white sm:text-2xl">Movie Hub</span>
               </Link>
