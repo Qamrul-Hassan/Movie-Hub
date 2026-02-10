@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movie Hub
 
-## Getting Started
+Movie Hub is a cinematic movie discovery app built with Next.js, Redux Toolkit, and TMDB APIs.
+It includes trending/popular catalogs, search, trailers, favorites, responsive navigation, and custom animated interactions.
 
-First, run the development server:
+## What this project includes
+
+- Hero-driven home page with featured movie
+- Catalog sections:
+  - Trending (Today / This Week)
+  - Latest Trailers (Popular / In Theaters)
+  - Popular Movies
+  - Top Rated Movies
+- Search page (`/search`) with TMDB multi-search
+- Favorites page (`/favorites`) with local persistence
+- Support page (`/support`)
+- Additional sections:
+  - `/discussion`
+  - `/leaderboard`
+  - Dynamic category pages under `/movies/*`, `/tv/*`, `/people/*`
+- Trailer playback buttons from TMDB video endpoints
+- Custom cinematic UI animations (favorite fly, remove-to-trash, dropdowns, fades)
+
+## Tech stack
+
+- Next.js 15 (App Router + a Pages route bridge)
+- React 18 + TypeScript
+- Redux Toolkit + React Redux
+- Tailwind CSS v4
+- TMDB API (movie data, videos, search)
+- React Icons
+
+## Animation approach
+
+This project currently uses:
+
+- CSS keyframes (global and component classes)
+- Web Animations API (`element.animate(...)`) for advanced effects
+
+Note: Framer Motion is not used in the current codebase.
+
+## Project structure (key files)
+
+- `src/app/page.tsx` - home page
+- `src/app/search/page.tsx` - search experience
+- `src/app/favorites/page.tsx` - favorites page
+- `src/components/Navbar.tsx` - responsive navbar + mobile toggle panel
+- `src/components/MovieRow.tsx` - reusable card grid + interactions
+- `src/hooks/useFavorites.ts` - favorites persistence hook
+- `src/lib/tmdb.ts` - TMDB fetch helper
+- `src/lib/trailer.ts` - trailer playback helper
+- `src/store/` - Redux store + movie slice
+- `src/pages/_app.tsx` - provider/layout support for pages routes
+
+## Environment variables
+
+Create `.env.local` in project root:
+
+```env
+NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key
+```
+
+## Installation
+
+```bash
+npm install
+```
+
+## Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+- `npm run dev` - start development server
+- `npm run build` - production build
+- `npm run start` - run production server
+- `npm run lint` - lint with ESLint cache
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- The app is responsive and optimized for mobile + desktop.
+- Reduced-motion preferences are respected for animations.
+- Some routes are served via App Router and some via Pages bridge for compatibility.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## GitHub
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Repository: `Qamrul-Hassan/Movie-Hub`

@@ -35,6 +35,7 @@ interface TMDBListItem {
   title?: string
   name?: string
   poster_path?: string | null
+  backdrop_path?: string | null
   profile_path?: string | null
   vote_average?: number
   release_date?: string
@@ -43,8 +44,8 @@ interface TMDBListItem {
 
 export default function SectionCategoryPage() {
   const params = useParams<{ section: string; slug: string }>()
-  const section = params.section as SectionKey
-  const slug = params.slug
+  const section = (params?.section || '') as SectionKey
+  const slug = params?.slug || ''
 
   const config = useMemo(() => catalogConfig[section]?.[slug], [section, slug])
   const [items, setItems] = useState<Movie[]>([])
@@ -73,6 +74,7 @@ export default function SectionCategoryPage() {
         const normalized = (data.results || []).map((item: TMDBListItem): Movie => ({
           ...item,
           poster_path: item.poster_path ?? item.profile_path ?? null,
+          backdrop_path: item.backdrop_path ?? item.poster_path ?? item.profile_path ?? null,
           title: item.title ?? item.name,
           vote_average: item.vote_average ?? 0,
           release_date: item.release_date ?? item.first_air_date,

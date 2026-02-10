@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MovieRow from '@/components/MovieRow'
 import { playTrailer } from '@/lib/trailer'
@@ -15,16 +15,17 @@ interface SearchItem {
   title?: string
   name?: string
   poster_path?: string | null
+  backdrop_path?: string | null
   profile_path?: string | null
   vote_average?: number
   release_date?: string
   first_air_date?: string
 }
 
-export default function SearchPage() {
+function SearchPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const urlQuery = useMemo(() => (searchParams.get('q') || '').trim(), [searchParams])
+  const urlQuery = useMemo(() => (searchParams?.get('q') || '').trim(), [searchParams])
   const [inputValue, setInputValue] = useState(urlQuery)
   const [results, setResults] = useState<Movie[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -68,6 +69,7 @@ export default function SearchPage() {
           const normalized: Movie[] = (data.results || []).map((item) => ({
             ...item,
             poster_path: item.poster_path ?? item.profile_path ?? null,
+            backdrop_path: item.backdrop_path ?? item.poster_path ?? item.profile_path ?? null,
             title: item.title ?? item.name,
             vote_average: item.vote_average ?? 0,
             release_date: item.release_date ?? item.first_air_date,
@@ -142,5 +144,13 @@ export default function SearchPage() {
         )}
       </section>
     </main>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen text-white p-6">Loading search...</main>}>
+      <SearchPageContent />
+    </Suspense>
   )
 }
