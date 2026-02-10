@@ -1,15 +1,14 @@
 /* src/app/globals.css */
 @import "tailwindcss";
+@tailwind utilities;
 
-/* Color variables */
 :root {
   --background: #0f111a;
   --foreground: #ededed;
-  --primary: #1d4ed8; /* Tailwind blue-700 */
-  --secondary: #f97316; /* Tailwind orange-500 */
+  --primary: #1d4ed8;
+  --secondary: #f97316;
 }
 
-/* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -17,9 +16,7 @@
   }
 }
 
-/* Smart animated cinematic gradient background */
 body {
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--foreground);
   background: linear-gradient(120deg, #1e1e2f, #2b2b4a, #1e1e2f, #3a3a5c, #1e1e2f);
   background-size: 800% 800%;
@@ -27,7 +24,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Gradient animation */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
@@ -46,12 +42,284 @@ body {
   }
 }
 
-/* Optional: smooth transitions for theme changes */
-* {
-  transition: background 0.5s ease, color 0.5s ease;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Optional: scrollbar hide for better cinematic feel */
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.motion-safe\\:animate-fade-in {
+  animation: fadeIn 0.45s ease both;
+}
+
+.animate-dropdown {
+  animation: dropdownIn 0.2s ease both;
+}
+
+@keyframes trashDrop {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(30px) scale(0.96) rotate(-4deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) scale(0.8) rotate(-12deg);
+  }
+}
+
+.animate-trash-drop {
+  animation: trashDrop 0.38s ease-in forwards;
+}
+
+@keyframes cardRemoveSource {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  72% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.animate-card-remove-source {
+  animation: cardRemoveSource 1.25s ease forwards;
+}
+
+@keyframes removeSourceSquash {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scaleX(1.05) scaleY(0.9);
+  }
+  55% {
+    transform: scaleX(0.92) scaleY(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-remove-source-squash {
+  animation: removeSourceSquash 0.44s ease;
+}
+
+@keyframes trashGlobalIn {
+  0% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.72) rotate(-8deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.08) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes trashGlobalPulse {
+  0% {
+    box-shadow: 0 0 0 rgba(248, 113, 113, 0);
+  }
+  50% {
+    box-shadow: 0 0 42px rgba(248, 113, 113, 0.75);
+  }
+  100% {
+    box-shadow: 0 0 18px rgba(248, 113, 113, 0.4);
+  }
+}
+
+.animate-trash-global-in {
+  animation: trashGlobalIn 0.46s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.animate-trash-global-pulse {
+  animation: trashGlobalPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes trashSpotlight {
+  0% {
+    opacity: 0;
+    background: radial-gradient(circle at 88% 88%, rgba(248, 113, 113, 0.22), transparent 28%);
+  }
+  100% {
+    opacity: 1;
+    background: radial-gradient(circle at 88% 88%, rgba(248, 113, 113, 0.3), transparent 36%);
+  }
+}
+
+.animate-trash-spotlight {
+  animation: trashSpotlight 0.32s ease forwards;
+}
+
+@keyframes trashLidSnap {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  45% {
+    transform: rotate(-12deg) translateY(-2px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+}
+
+.animate-trash-lid-snap {
+  transform-origin: center;
+  animation: trashLidSnap 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes trashImpact {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(248, 113, 113, 0.4);
+  }
+  50% {
+    transform: scale(1.16);
+    box-shadow: 0 0 48px rgba(251, 113, 133, 0.85);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 22px rgba(248, 113, 113, 0.45);
+  }
+}
+
+.animate-trash-impact {
+  animation: trashImpact 0.52s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes favoriteAdd {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(244, 114, 182, 0);
+  }
+  40% {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(244, 114, 182, 0.45);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(244, 114, 182, 0);
+  }
+}
+
+@keyframes favoriteIconPop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-favorite-add {
+  animation: favoriteAdd 0.52s ease;
+}
+
+.animate-favorite-icon {
+  animation: favoriteIconPop 0.45s ease;
+}
+
+@keyframes favoritesTargetPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(34, 211, 238, 0);
+  }
+  45% {
+    transform: scale(1.12);
+    box-shadow: 0 0 24px rgba(34, 211, 238, 0.55);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(34, 211, 238, 0);
+  }
+}
+
+.animate-favorites-target-pulse {
+  animation: favoritesTargetPulse 0.65s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible:not(#movie-search),
+select:focus-visible {
+  outline: 2px solid #8be9ff;
+  outline-offset: 2px;
+}
+
+#movie-search:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    animation: none;
+    background-position: 50% 50%;
+  }
 }
