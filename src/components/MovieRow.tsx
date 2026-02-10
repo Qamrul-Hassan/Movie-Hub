@@ -2,15 +2,17 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { FaHeart, FaPlay, FaRegHeart, FaStar, FaTrashAlt } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaHeart, FaPlay, FaRegHeart, FaStar, FaTrashAlt } from 'react-icons/fa'
 import { useFavorites } from '@/hooks/useFavorites'
 import type { Movie } from '@/store'
 
 interface MovieRowProps {
   title?: string
   movies: Movie[]
-  handlePlayTrailer?: (id: number) => void
+  handlePlayTrailer?: (id: number, mediaType?: 'movie' | 'tv') => void
   showRemoveFavorite?: boolean
+  mediaType?: 'movie' | 'tv' | 'person'
+  getMediaType?: (movie: Movie) => 'movie' | 'tv' | 'person'
 }
 
 function createTrashImpactBurst(targetX: number, targetY: number) {
@@ -174,7 +176,20 @@ function flyHeartToFavorites(sourceEl: HTMLElement) {
   }
 }
 
-export default function MovieRow({ title, movies, handlePlayTrailer, showRemoveFavorite = false }: MovieRowProps) {
+const resolveTmdbUrl = (movieId: number, mediaType: 'movie' | 'tv' | 'person') => {
+  if (mediaType === 'tv') return `https://www.themoviedb.org/tv/${movieId}`
+  if (mediaType === 'person') return `https://www.themoviedb.org/person/${movieId}`
+  return `https://www.themoviedb.org/movie/${movieId}`
+}
+
+export default function MovieRow({
+  title,
+  movies,
+  handlePlayTrailer,
+  showRemoveFavorite = false,
+  mediaType = 'movie',
+  getMediaType,
+}: MovieRowProps) {
   const { isFavorite, toggleFavorite } = useFavorites()
   const [removingId, setRemovingId] = useState<number | null>(null)
   const [justAddedId, setJustAddedId] = useState<number | null>(null)
@@ -225,6 +240,9 @@ export default function MovieRow({ title, movies, handlePlayTrailer, showRemoveF
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-8">
         {movies.map((movie, index) => {
           const favorite = isFavorite(movie.id)
+          const itemMediaType = getMediaType?.(movie) ?? movie.media_type ?? mediaType
+          const tmdbUrl = resolveTmdbUrl(movie.id, itemMediaType)
+          const canPlayTrailer = itemMediaType !== 'person' && Boolean(handlePlayTrailer)
 
           return (
             <article
@@ -256,11 +274,11 @@ export default function MovieRow({ title, movies, handlePlayTrailer, showRemoveF
                   {(movie.vote_average ?? 0).toFixed(1)}
                 </p>
 
-                <div className={`grid gap-2 ${handlePlayTrailer ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                  {handlePlayTrailer && (
+                <div className={`grid gap-2 ${canPlayTrailer ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  {canPlayTrailer && (
                     <button
                       className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-cyan-300/30 bg-cyan-500/20 px-2 py-1.5 text-xs font-semibold text-cyan-100 transition hover:bg-cyan-500/35"
-                      onClick={() => handlePlayTrailer(movie.id)}
+                      onClick={() => handlePlayTrailer?.(movie.id, itemMediaType === 'tv' ? 'tv' : 'movie')}
                       type="button"
                     >
                       <FaPlay aria-hidden="true" />
@@ -297,6 +315,15 @@ export default function MovieRow({ title, movies, handlePlayTrailer, showRemoveF
                     </button>
                   )}
                 </div>
+                <a
+                  href={tmdbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-2 py-1.5 text-xs font-semibold text-slate-100 transition hover:bg-white/20"
+                >
+                  <FaExternalLinkAlt aria-hidden="true" />
+                  {itemMediaType === 'person' ? 'Open Details' : 'Watch Options'}
+                </a>
               </div>
             </article>
           )

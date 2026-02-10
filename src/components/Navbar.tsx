@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { FaFilm, FaSearch } from 'react-icons/fa'
 import { useEffect, useRef, useState } from 'react'
 
-type MenuKey = 'movies' | 'tvshows' | 'people' | 'more'
+type MenuKey = 'movies' | 'tvshows' | 'people' | 'kids' | 'more'
 
 const navMenus: {
   key: MenuKey
@@ -38,9 +38,19 @@ const navMenus: {
     links: [{ href: '/people/popular', label: 'Popular People' }],
   },
   {
+    key: 'kids',
+    label: 'Kids Zone',
+    links: [
+      { href: '/kids/animated', label: 'Animated' },
+      { href: '/kids/cartoons', label: 'Cartoons' },
+      { href: '/kids/family', label: 'Family' },
+    ],
+  },
+  {
     key: 'more',
     label: 'More',
     links: [
+      { href: '/countries', label: 'Countries' },
       { href: '/discussion', label: 'Discussion' },
       { href: '/leaderboard', label: 'Leaderboard' },
     ],
@@ -222,14 +232,14 @@ export default function Navbar() {
 
               <Link
                 id="favorites-nav-button"
-                className={`${navButtonBase} ${isLinkActive('/favorites') ? 'bg-white text-[#032541]' : 'bg-slate-100 text-[#032541] hover:bg-white'}`}
+                className={`${navButtonBase} ${isLinkActive('/favorites') ? 'bg-red-500 text-white shadow-[0_0_22px_rgba(239,68,68,0.55)]' : 'bg-slate-100 text-[#032541] shadow-[0_0_10px_rgba(239,68,68,0.2)] hover:bg-red-500 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]'}`}
                 href="/favorites"
                 aria-current={isLinkActive('/favorites') ? 'page' : undefined}
               >
                 Favorites
               </Link>
               <Link
-                className={`${navButtonBase} ${isLinkActive('/support') ? 'bg-cyan-300 text-[#032541]' : 'bg-cyan-400/90 text-[#032541] hover:brightness-110'}`}
+                className={`${navButtonBase} ${isLinkActive('/support') ? 'bg-cyan-300 text-[#032541] shadow-[0_0_24px_rgba(34,211,238,0.58)]' : 'bg-cyan-400/90 text-[#032541] shadow-[0_0_12px_rgba(34,211,238,0.34)] hover:brightness-110 hover:shadow-[0_0_24px_rgba(34,211,238,0.56)]'}`}
                 href="/support"
                 aria-current={isLinkActive('/support') ? 'page' : undefined}
               >
@@ -283,7 +293,7 @@ export default function Navbar() {
                       onClick={() => setOpenMenu(isOpen ? null : menu.key)}
                     >
                       {menu.label}
-                      <span className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}>▾</span>
+                      <span className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}>v</span>
                     </button>
                     {isOpen && (
                       <div className="mt-2 grid gap-1">
@@ -307,14 +317,14 @@ export default function Navbar() {
 
               <div className="grid grid-cols-2 gap-2 pt-1">
                 <Link
-                  className={`${navButtonBase} ${isLinkActive('/favorites') ? 'bg-white text-[#032541]' : 'bg-slate-100 text-[#032541]'}`}
+                  className={`${navButtonBase} ${isLinkActive('/favorites') ? 'bg-red-500 text-white shadow-[0_0_22px_rgba(239,68,68,0.55)]' : 'bg-slate-100 text-[#032541] shadow-[0_0_10px_rgba(239,68,68,0.2)] hover:bg-red-500 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]'}`}
                   href="/favorites"
                   aria-current={isLinkActive('/favorites') ? 'page' : undefined}
                 >
                   Favorites
                 </Link>
                 <Link
-                  className={`${navButtonBase} ${isLinkActive('/support') ? 'bg-cyan-300 text-[#032541]' : 'bg-cyan-400/90 text-[#032541]'}`}
+                  className={`${navButtonBase} ${isLinkActive('/support') ? 'bg-cyan-300 text-[#032541] shadow-[0_0_24px_rgba(34,211,238,0.58)]' : 'bg-cyan-400/90 text-[#032541] shadow-[0_0_12px_rgba(34,211,238,0.34)] hover:brightness-110 hover:shadow-[0_0_24px_rgba(34,211,238,0.56)]'}`}
                   href="/support"
                   aria-current={isLinkActive('/support') ? 'page' : undefined}
                 >

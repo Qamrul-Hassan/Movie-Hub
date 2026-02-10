@@ -9,12 +9,12 @@ const leaderboardData = [
 export default function LeaderboardPage() {
   return (
     <main className="min-h-screen text-white">
-      <section className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-slate-900/45 p-6 sm:p-8">
+      <section className="glass-panel mx-auto max-w-5xl p-6 sm:p-8">
         <h1 className="text-3xl font-bold sm:text-4xl">Leaderboard</h1>
         <p className="mt-3 text-slate-300">Top trending picks from the community this week.</p>
       </section>
 
-      <section className="mx-auto mt-6 max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-slate-900/55">
+      <section className="glass-panel mx-auto mt-6 max-w-5xl overflow-hidden">
         <ul>
           {leaderboardData.map((item) => (
             <li key={item.rank} className="flex items-center justify-between border-b border-white/10 px-4 py-4 last:border-b-0">

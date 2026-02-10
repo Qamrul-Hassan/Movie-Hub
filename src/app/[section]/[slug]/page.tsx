@@ -7,7 +7,7 @@ import MovieRow from '@/components/MovieRow'
 import { playTrailer } from '@/lib/trailer'
 import type { Movie } from '@/store'
 
-type SectionKey = 'movies' | 'tv' | 'people'
+type SectionKey = 'movies' | 'tv' | 'people' | 'kids'
 
 const catalogConfig: Record<
   SectionKey,
@@ -27,6 +27,26 @@ const catalogConfig: Record<
   },
   people: {
     popular: { title: 'Popular People', endpoint: '/person/popular?language=en-US&page=1', mediaType: 'person' },
+  },
+  kids: {
+    animated: {
+      title: 'Kids Zone: Animated Movies',
+      endpoint:
+        '/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=16',
+      mediaType: 'movie',
+    },
+    cartoons: {
+      title: 'Kids Zone: Cartoon TV Shows',
+      endpoint:
+        '/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=16',
+      mediaType: 'tv',
+    },
+    family: {
+      title: 'Kids Zone: Family Favorites',
+      endpoint:
+        '/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=10751',
+      mediaType: 'movie',
+    },
   },
 }
 
@@ -113,7 +133,7 @@ export default function SectionCategoryPage() {
   if (!config) {
     return (
       <main className="min-h-screen text-white">
-        <section className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-slate-900/50 p-6 sm:p-8">
+        <section className="glass-panel mx-auto max-w-3xl p-6 sm:p-8">
           <h1 className="text-2xl font-bold">Page not found</h1>
           <p className="mt-2 text-slate-300">This section does not exist yet.</p>
           <Link href="/" className="mt-5 inline-flex rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-[#032541]">
@@ -126,11 +146,11 @@ export default function SectionCategoryPage() {
 
   return (
     <main className="min-h-screen text-white">
-      <section className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-slate-900/45 p-5 sm:p-8">
+      <section className="glass-panel mx-auto max-w-7xl p-5 sm:p-8">
         <h1 className="text-3xl font-bold sm:text-4xl">{config.title}</h1>
       </section>
 
-      <section className="mx-auto max-w-7xl pt-7">
+      <section className="glass-panel mx-auto mt-6 max-w-7xl px-4 py-6">
         {isLoading && <p className="text-slate-300">Loading...</p>}
         {!isLoading && error && <p className="text-red-300">{error}</p>}
         {!isLoading && !error && (

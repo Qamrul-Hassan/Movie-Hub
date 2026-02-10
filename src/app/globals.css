@@ -269,12 +269,99 @@ body {
   animation: favoritesTargetPulse 0.65s ease;
 }
 
+@keyframes headingTypeIn {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.3;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+.country-chip-wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(120deg, rgba(15, 23, 42, 0.62), rgba(30, 41, 59, 0.62));
+}
+
+.country-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #dbeafe;
+  border: 1px solid rgba(125, 211, 252, 0.26);
+  background: linear-gradient(135deg, rgba(15, 58, 92, 0.95), rgba(12, 74, 110, 0.9));
+  box-shadow: inset 0 1px 0 rgba(191, 219, 254, 0.2), 0 6px 14px rgba(3, 37, 65, 0.35);
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 200ms ease, filter 220ms ease;
+}
+
+.country-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(103, 232, 249, 0.65);
+  box-shadow: inset 0 1px 0 rgba(191, 219, 254, 0.26), 0 10px 20px rgba(8, 145, 178, 0.32);
+  filter: brightness(1.08);
+}
+
+.country-chip:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.9);
+  outline-offset: 2px;
+}
+
+.glass-country-card {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.52), rgba(30, 41, 59, 0.32));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 16px 36px rgba(2, 6, 23, 0.35);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+
+.glass-panel {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(30, 41, 59, 0.3));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 30px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(12px) saturate(118%);
+  -webkit-backdrop-filter: blur(12px) saturate(118%);
+}
+
+main h1 {
+  display: inline-block;
+  will-change: clip-path, opacity;
+  animation: headingTypeIn 1.05s steps(28, end) both;
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible:not(#movie-search),
 select:focus-visible {
   outline: 2px solid #8be9ff;
   outline-offset: 2px;
+}
+
+button {
+  box-shadow: 0 0 0 rgba(34, 211, 238, 0);
+  transition: box-shadow 220ms ease, filter 200ms ease, transform 180ms ease;
+}
+
+button:hover {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.28);
+  filter: brightness(1.04);
+}
+
+button:focus-visible {
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.42);
 }
 
 #movie-search:focus-visible {
@@ -321,5 +408,11 @@ input:-webkit-autofill:active {
   body {
     animation: none;
     background-position: 50% 50%;
+  }
+
+  main h1 {
+    animation: none;
+    clip-path: none;
+    opacity: 1;
   }
 }

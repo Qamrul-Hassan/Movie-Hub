@@ -28,6 +28,11 @@ export default function PopularMoviesPage() {
 
   return (
     <main className="min-h-screen text-white">
+      <section className="glass-panel mx-auto mb-4 max-w-7xl p-5 sm:p-8">
+        <h1 className="text-3xl font-bold sm:text-4xl">Popular Movies</h1>
+        <p className="mt-2 text-slate-300">Most watched and trending picks right now.</p>
+      </section>
+
       {hero && (
         <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10" aria-label="Popular hero">
           <div className="relative h-[50vh] min-h-[320px] w-full">

@@ -12,6 +12,7 @@ interface SearchResponse {
 
 interface SearchItem {
   id: number
+  media_type?: 'movie' | 'tv' | 'person'
   title?: string
   name?: string
   poster_path?: string | null
@@ -35,9 +36,9 @@ function SearchPageContent() {
     setInputValue(urlQuery)
   }, [urlQuery])
 
-  const handlePlayTrailer = useCallback(async (movieId: number) => {
+  const handlePlayTrailer = useCallback(async (movieId: number, mediaType: 'movie' | 'tv' = 'movie') => {
     try {
-      await playTrailer(movieId, 'movie')
+      await playTrailer(movieId, mediaType)
     } catch {
       alert('Trailer not available')
     }
@@ -71,10 +72,11 @@ function SearchPageContent() {
             poster_path: item.poster_path ?? item.profile_path ?? null,
             backdrop_path: item.backdrop_path ?? item.poster_path ?? item.profile_path ?? null,
             title: item.title ?? item.name,
+            media_type: item.media_type,
             vote_average: item.vote_average ?? 0,
             release_date: item.release_date ?? item.first_air_date,
           }))
-          setResults(normalized.filter((item) => item.poster_path))
+          setResults(normalized)
         }
       } catch {
         if (isMounted) {
@@ -104,7 +106,7 @@ function SearchPageContent() {
 
   return (
     <main className="min-h-screen text-white">
-      <section className="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-slate-900/45 p-5 sm:p-8">
+      <section className="glass-panel mx-auto max-w-6xl p-5 sm:p-8">
         <h1 className="text-3xl font-bold sm:text-4xl">Search</h1>
         <p className="mt-2 text-slate-300">Find movies, TV shows, and people instantly.</p>
 
@@ -133,14 +135,19 @@ function SearchPageContent() {
         </form>
       </section>
 
-      <section className="mx-auto max-w-7xl px-1 pt-8">
+      <section className="glass-panel mx-auto mt-6 max-w-7xl px-4 py-6">
         {isLoading && <p className="text-slate-300">Searching...</p>}
         {!isLoading && error && <p className="text-red-300">{error}</p>}
         {!isLoading && !error && urlQuery && results.length === 0 && (
           <p className="text-slate-300">No results found for &quot;{urlQuery}&quot;.</p>
         )}
         {!isLoading && results.length > 0 && (
-          <MovieRow title={`Results for "${urlQuery}"`} movies={results} handlePlayTrailer={handlePlayTrailer} />
+          <MovieRow
+            title={`Results for "${urlQuery}"`}
+            movies={results}
+            handlePlayTrailer={handlePlayTrailer}
+            getMediaType={(movie) => movie.media_type ?? 'movie'}
+          />
         )}
       </section>
     </main>

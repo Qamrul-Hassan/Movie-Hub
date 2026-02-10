@@ -5,6 +5,7 @@ export interface Movie {
   id: number
   title?: string
   name?: string
+  media_type?: 'movie' | 'tv' | 'person'
   poster_path: string | null
   backdrop_path: string | null
   vote_average: number

@@ -3,8 +3,10 @@
 import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FaPlay, FaStar } from 'react-icons/fa'
 import MovieRow from '@/components/MovieRow'
+import { countryCategories } from '@/lib/countries'
 import { playTrailer } from '@/lib/trailer'
 import {
   fetchPopular,
@@ -42,6 +44,26 @@ export default function Home() {
 
   return (
     <main className="min-h-screen text-white">
+      <section className="pt-2" aria-label="Browse by country">
+        <div className="glass-country-card mb-4 p-3 sm:p-4">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xl font-semibold sm:text-2xl">Browse by Country</h2>
+            <p className="text-xs text-slate-300 sm:text-sm">Open a country page to see popular drama and TV series.</p>
+          </div>
+          <div className="country-chip-wrap">
+            {countryCategories.map((category) => (
+              <Link
+                key={category.key}
+                href={`/countries/${category.key}`}
+                className="country-chip"
+              >
+                {category.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {hero && (
         <section className="relative mt-2 h-[55vh] min-h-[360px] w-full overflow-hidden rounded-3xl" aria-label="Featured movie">
           <Image
@@ -72,7 +94,7 @@ export default function Home() {
         </section>
       )}
 
-      <section className="pt-7" aria-label="Trending movies">
+      <section className="glass-panel pt-7 px-4 pb-5 sm:px-5 sm:pb-6" aria-label="Trending movies">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold">Trending</h2>
           <div className="inline-flex rounded-full border border-white/15 bg-slate-900/60 p-1" role="tablist" aria-label="Trending period">
@@ -101,7 +123,7 @@ export default function Home() {
         <MovieRow movies={trending} handlePlayTrailer={handlePlayTrailer} />
       </section>
 
-      <section className="pt-2" aria-label="Latest trailers">
+      <section className="glass-panel mt-3 pt-5 px-4 pb-5 sm:px-5 sm:pb-6" aria-label="Latest trailers">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold">Latest Trailers</h2>
           <div className="inline-flex rounded-full border border-white/15 bg-slate-900/60 p-1" role="tablist" aria-label="Trailer type">
@@ -130,7 +152,7 @@ export default function Home() {
         <MovieRow movies={trailers} handlePlayTrailer={handlePlayTrailer} />
       </section>
 
-      <section className="space-y-8 pt-2" aria-label="Popular and top rated movies">
+      <section className="glass-panel mt-3 space-y-8 px-4 py-5 sm:px-5 sm:py-6" aria-label="Popular and top rated movies">
         <MovieRow title="Popular Movies" movies={popular} handlePlayTrailer={handlePlayTrailer} />
         <MovieRow title="Top Rated Movies" movies={topRated} handlePlayTrailer={handlePlayTrailer} />
       </section>
