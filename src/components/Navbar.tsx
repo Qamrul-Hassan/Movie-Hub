@@ -296,12 +296,17 @@ export default function Navbar() {
                   <div key={menu.key} className="rounded-lg border border-white/10 bg-[#0b3658]/70 p-2">
                     <button
                       type="button"
-                      className={`${navButtonBase} w-full justify-between ${isMenuActive ? 'bg-cyan-200 text-[#032541]' : 'bg-white/10 text-slate-100'}`}
+                      className={`${navButtonBase} relative w-full justify-center pr-10 ${isMenuActive ? 'bg-cyan-200 text-[#032541]' : 'bg-white/10 text-slate-100'}`}
                       aria-expanded={isOpen}
                       onClick={() => setOpenMenu(isOpen ? null : menu.key)}
                     >
-                      {menu.label}
-                      <span className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}>v</span>
+                      <span>{menu.label}</span>
+                      <span
+                        aria-hidden="true"
+                        className={`pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs leading-none transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                      >
+                        ▾
+                      </span>
                     </button>
                     {isOpen && (
                       <div className="mt-2 grid gap-1">
