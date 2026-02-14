@@ -131,7 +131,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/"
-                className={`md:hidden inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                className={`xl:hidden inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                   pathname === '/'
                     ? 'bg-cyan-300 text-[#032541] shadow-[0_0_16px_rgba(34,211,238,0.55)]'
                     : 'bg-cyan-400/90 text-[#032541] shadow-[0_0_12px_rgba(34,211,238,0.35)]'
@@ -145,7 +145,7 @@ export default function Navbar() {
             <button
               type="button"
               aria-label="Toggle menu"
-              className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/35 bg-[#0c3a5c]/90 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.2)] transition md:hidden"
+              className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/35 bg-[#0c3a5c]/90 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.2)] transition xl:hidden"
               onClick={() => setMobilePanelOpen((open) => !open)}
             >
               <span className="relative h-5 w-5">
@@ -164,7 +164,7 @@ export default function Navbar() {
               </span>
             </button>
 
-            <div className="hidden min-w-0 flex-wrap items-center gap-2 sm:gap-3 md:flex">
+            <div className="hidden min-w-0 flex-wrap items-center gap-2 sm:gap-3 xl:flex">
               <Link
                 href="/"
                 className={`${navButtonBase} ${currentPath === '/' ? 'bg-white text-[#032541] shadow-sm' : 'bg-white/10 text-slate-100 hover:bg-white/20'}`}
@@ -217,9 +217,9 @@ export default function Navbar() {
               })}
             </div>
 
-            <div className="hidden items-center gap-2 md:flex">
+            <div className="hidden items-center gap-2 xl:flex">
               <form
-                className="flex min-w-0 items-center gap-2 rounded-full border border-cyan-300/40 bg-[#0c3a5c]/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 focus-within:border-cyan-200 focus-within:shadow-[0_0_28px_rgba(34,211,238,0.48)] md:w-[360px] lg:w-[430px]"
+                className="flex min-w-0 items-center gap-2 rounded-full border border-cyan-300/40 bg-[#0c3a5c]/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 focus-within:border-cyan-200 focus-within:shadow-[0_0_28px_rgba(34,211,238,0.48)] xl:w-[360px] 2xl:w-[430px]"
                 onSubmit={handleSearchSubmit}
                 role="search"
               >
@@ -256,7 +256,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="mt-3 flex w-full items-center gap-2 sm:gap-3 md:hidden">
+          <div className="mt-3 flex w-full items-center gap-2 sm:gap-3 xl:hidden">
             <form
               className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-cyan-300/40 bg-[#0c3a5c]/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 focus-within:border-cyan-200 focus-within:shadow-[0_0_28px_rgba(34,211,238,0.48)]"
               onSubmit={handleSearchSubmit}
@@ -279,7 +279,7 @@ export default function Navbar() {
           </div>
 
           {mobilePanelOpen && (
-            <div className="mt-3 space-y-2 rounded-xl border border-white/15 bg-[#082d4a]/95 p-3 md:hidden motion-safe:animate-fade-in">
+            <div className="mt-3 space-y-2 rounded-xl border border-white/15 bg-[#082d4a]/95 p-3 xl:hidden motion-safe:animate-fade-in">
               <Link
                 href="/"
                 className={`${navButtonBase} w-full justify-center ${currentPath === '/' ? 'bg-cyan-300 text-[#032541] shadow-[0_0_18px_rgba(34,211,238,0.45)]' : 'bg-white/10 text-slate-100'}`}

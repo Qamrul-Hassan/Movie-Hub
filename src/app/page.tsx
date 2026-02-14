@@ -65,7 +65,10 @@ export default function Home() {
       </section>
 
       {hero && (
-        <section className="relative mt-2 h-[55vh] min-h-[360px] w-full overflow-hidden rounded-3xl" aria-label="Featured movie">
+        <section
+          className="relative mt-2 h-[48vh] min-h-[300px] w-full overflow-hidden rounded-3xl sm:h-[52vh] sm:min-h-[340px] lg:h-[55vh] lg:min-h-[360px]"
+          aria-label="Featured movie"
+        >
           <Image
             src={`https://image.tmdb.org/t/p/original${hero.backdrop_path}`}
             alt={hero.title || hero.name || 'Hero movie'}
